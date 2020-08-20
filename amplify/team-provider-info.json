@@ -1,0 +1,28 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-amdaweb-dev-134906-authRole",
+            "UnauthRoleArn": "arn:aws:iam::407830824457:role/amplify-amdaweb-dev-134906-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::407830824457:role/amplify-amdaweb-dev-134906-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-amdaweb-dev-134906-deployment",
+            "UnauthRoleName": "amplify-amdaweb-dev-134906-unauthRole",
+            "StackName": "amplify-amdaweb-dev-134906",
+            "StackId": "arn:aws:cloudformation:us-east-1:407830824457:stack/amplify-amdaweb-dev-134906/d773ae70-d9a7-11ea-8540-0ed2247e0ea9",
+            "AmplifyAppId": "dhvg5glnrxaet"
+        },
+        "categories": {
+            "auth": {
+                "cognitoa3f8e88e": {}
+            },
+            "xr": {
+                "amda": {
+                    "url": "https://sumerian.us-east-1.amazonaws.com/20180801/projects/AMDA/release/authTokens?sceneId=745cfac2c92d463abfe08c4cbd6e8469.scene",
+                    "sceneId": "745cfac2c92d463abfe08c4cbd6e8469.scene",
+                    "region": "us-east-1",
+                    "projectName": "AMDA"
+                }
+            }
+        }
+    }
+}

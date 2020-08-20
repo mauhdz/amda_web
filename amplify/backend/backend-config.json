@@ -1,0 +1,20 @@
+{
+	"auth": {
+		"cognitoa3f8e88e": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"xr": {
+		"amda": {
+			"service": "Sumerian",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
