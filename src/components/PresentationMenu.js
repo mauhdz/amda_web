@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import GlobalState from '../../contexts/GlobalState';
+import GlobalState from '../contexts/GlobalState';
 
-import { emit } from "../SumerianInterface"
-import './Menus.css';
+import { emit } from "../utils/SumerianInterface"
+import '../App.css';
 
 const PresentationMenu = () => {
 

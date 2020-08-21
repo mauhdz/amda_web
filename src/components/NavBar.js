@@ -1,8 +1,7 @@
 import React from 'react';
-import './Menus.css';
+import '../App.css';
 
-
-function MainMenu() {
+function NavBar() {
     return (
         <header>
             <img className="logo" src="img/logo.svg" alt="logo"/>
@@ -18,4 +17,4 @@ function MainMenu() {
     )
 }
 
-export default MainMenu;
+export default NavBar;

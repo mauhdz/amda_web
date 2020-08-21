@@ -1,13 +1,15 @@
-import React, { useState, Component } from 'react';
+import React, { useState,useEffect,Component } from 'react';
 import './App.css';
 import GlobalState from './contexts/GlobalState';
-import PresentationMenu from './components/Menus/PresentationMenu'
-import MainMenu from './components/Menus/MainMenu'
-
 
 import { XR as AwsXR } from 'aws-amplify';
 import Amplify from 'aws-amplify';
 import Aws_exports from './aws-exports';
+
+import {addListener, removeListener} from './utils/SumerianInterface'
+import PresentationMenu from './components/PresentationMenu'
+import NavBar from './components/NavBar'
+
 //import '@aws-amplify/ui/dist/style.css';
 
 Amplify.configure(Aws_exports);
@@ -88,11 +90,21 @@ function App() {
     onClient:true,
     onPresentation:false
   });
+
+  //window.state makes the app state accesible to Sumerian and it updates whenever it changes
+  useEffect(()=>{
+    window.state=state;
+    console.log("onAnyStateChange: ", window.state)
+  },[state]);
+
+  useEffect(()=>{
+    console.log("should be called only once when sumerian starts")
+  },[state.onLoading]);
   
   return (
     <GlobalState.Provider value={[state,setState]}>
       <div className="App">
-        <MainMenu />
+        <NavBar />
         {state.onLoading && <IndeterminateLoading />}
         <div style={{ visibility: state.onLoading && 'hidden' }}>
           <SumerianScene scene='amda'
