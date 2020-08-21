@@ -39,7 +39,7 @@ class SumerianScene extends Component {
     console.log(window.controller);
     this.props.onLoaded();
     AwsXR.start("amda");
-    AwsXR.enableAudio('scene1');
+    AwsXR.enableAudio('amda');
   }
 
   async componentDidMount() {
@@ -93,11 +93,11 @@ function App() {
     <GlobalState.Provider value={[state,setState]}>
       <div className="App">
         <MainMenu />
-   {/*      {state.onLoading && <IndeterminateLoading />}
+        {state.onLoading && <IndeterminateLoading />}
         <div style={{ visibility: state.onLoading && 'hidden' }}>
           <SumerianScene scene='amda'
             onLoaded={() => setState(state=>({...state, onLoading:false}))} />
-        </div> */}
+        </div>
         <PresentationMenu />
       </div>
     </GlobalState.Provider>
