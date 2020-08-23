@@ -13,14 +13,15 @@ function App() {
     onLoading: true,
     onHome: true,
     onClient: false,
-    onPresentation: false
+    onPresentation: false,
+    onPresentationPaused:false
   });
 
   //window.state makes the app state accesible to Sumerian and it updates whenever it changes
   useEffect(() => {
     window.state = state;
-    console.log("onAnyStateChange: ", window.state);
-  }, [state]);
+    console.log("We are finally home: ", window.state);
+  }, [state.onHome]);
 
   //Listen to events on sumerian scene and changes state
   useEffect(() => {
@@ -46,8 +47,8 @@ function App() {
           <SumerianScene scene='amda'
             onLoaded={() => setState(state => ({ ...state, onLoading: false }))} />
         </div>
-        <PresentationMenu />
       </div>
+      <PresentationMenu />
     </GlobalState.Provider>
   );
 }

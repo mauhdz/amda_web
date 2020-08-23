@@ -9,14 +9,19 @@ const PresentationMenu = () => {
     const [state, setState] = useContext(GlobalState);
 
     const GoBackHome = () => {
-        setState(state => ({ ...state, onHome: true, onClient:false, onPresentation:false }));
-        console.log("Go back home: ", state)
         emitSumerianMessage("goBackHome");
+        setState(state => ({ ...state, onClient:false, onPresentation:false }));  
+        setTimeout(function(){setState(state => ({ ...state, onHome: true}));},1000);       
+    }
+ 
+    const StartPresentation = () => {
+        setState(state => ({ ...state, onClient: false, onPresentation: true, onPresentationPaused:false}));
+        emitSumerianMessage("startPresentation");
     }
 
-    const StartPresentation = () => {
-        setState(state => ({ ...state, onClient: false, onPresentation: true }));
-        emitSumerianMessage("startPresentation");
+    const PausePresentation = () => {
+        setState(state => ({ ...state, onPresentationPaused:true}));
+        emitSumerianMessage("pausePresentation");
     }
 
     const StopPresentation = () => {
@@ -36,10 +41,50 @@ const PresentationMenu = () => {
     const NextSlide = () => {
     }
 
-    const HomeButton= ()=>{
+    const HomeButton= ({clickAction})=>{
         return(
-            <a href="#" className="nav__link" onMouseDown={GoBackHome} >
+            <a href="#" className="nav__link" onClick={clickAction} >
                 <i className="material-icons nav__icon">home</i>
+            </a>
+        )
+    }
+
+    const PlayButton=({clickAction})=>{
+        return(
+            <a href="#" className="nav__link" onClick={clickAction}>
+                <i className="material-icons nav__icon">play_circle_filled</i>
+            </a>
+        )
+    }
+
+    const PauseButton=({clickAction})=>{
+        return(
+            <a href="#" className="nav__link" onClick={clickAction}>
+                <i className="material-icons nav__icon">pause</i>
+            </a>
+        )
+    }
+
+    const StopButton=({clickAction})=>{
+        return(
+            <a href="#" className="nav__link" onClick={clickAction}>
+                <i className="material-icons nav__icon">stop</i>
+            </a>
+        )
+    }
+
+    const ArrowButton=({style, clickAction})=>{
+        return(
+            <a href="#" className="nav__link" style={style} onClick={clickAction}>
+                <i className="material-icons nav__icon">play_arrow</i>
+            </a>
+        )
+    }
+
+    const ContactButton=()=>{
+        return(
+            <a href="#" className="nav__link">
+                <i className="material-icons nav__icon">help</i>
             </a>
         )
     }
@@ -48,18 +93,10 @@ const PresentationMenu = () => {
     const OnClientGUI = () => {
         return (
             <nav className="floating-menu">
-                <HomeButton/>
-                <a href="#" className="nav__link" onClick={StartPresentation}>
-                    <i className="material-icons nav__icon">play_circle_filled</i>
-                </a>
-
-                <a href="#" className="nav__link" style={{ transform: "rotate(180deg)" }} onClick={PreviousClient}>
-                    <i className="material-icons nav__icon">play_arrow</i>
-                </a>
-
-                <a href="#" className="nav__link" onClick={NextClient}>
-                    <i className="material-icons nav__icon">play_arrow</i>
-                </a>
+                <HomeButton clickAction={GoBackHome}/>
+                <PlayButton clickAction={StartPresentation}/>
+                <ArrowButton style={{transform:"rotate(180deg)"}} clickAction={PreviousClient}/>
+                <ArrowButton style={{}} clickAction={NextClient}/>
             </nav>
         )
     };
@@ -67,23 +104,12 @@ const PresentationMenu = () => {
     const OnPresentationGUI = () => {
         return (
             <nav className="floating-menu">
-                <HomeButton/>
-
-                <a href="#" className="nav__link" onClick={StopPresentation}>
-                    <i className="material-icons nav__icon">stop</i>
-                </a>
-
-                <a href="#" className="nav__link" onClick={PreviousSlide}>
-                    <i className="material-icons nav__icon" style={{ transform: "rotate(180deg)" }}>play_arrow</i>
-                </a>
-
-                <a href="#" className="nav__link" onClick={NextSlide}>
-                    <i className="material-icons nav__icon">play_arrow</i>
-                </a>
-
-                <a href="#" className="nav__link">
-                    <i className="material-icons nav__icon">help</i>
-                </a>
+                <HomeButton clickAction={GoBackHome}/>
+                {state.onPresentationPaused ? <PlayButton clickAction={StartPresentation}/> : <PauseButton clickAction={PausePresentation}/>}
+                <StopButton clickAction={StopPresentation}/>
+                <ArrowButton style={{transform:"rotate(180deg)"}} clickAction={PreviousSlide}/>
+                <ArrowButton style={{}} clickAction={NextSlide}/>
+                <ContactButton/>
             </nav>
         )
     };

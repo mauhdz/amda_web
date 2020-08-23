@@ -1,10 +1,10 @@
 import React from 'react';
 import '../App.css';
 
-function LoadingProgress() {
+function LoadingProgress(progress) {
     return (
         <div className="start_screen">
-            <h1>LOADING</h1>
+            <h1>{progress}</h1>
         </div>
     )
 }
