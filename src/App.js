@@ -20,14 +20,14 @@ function App() {
   //window.state makes the app state accesible to Sumerian and it updates whenever it changes
   useEffect(() => {
     window.state = state;
-    console.log("We are finally home: ", window.state);
+    //console.log("We are finally home: ", window.state);
   }, [state.onHome]);
 
   //Listen to events on sumerian scene and changes state
   useEffect(() => {
-    console.log("should be called only once when sumerian starts");
+    //console.log("should be called only once when sumerian starts");
     addSumerianListener("clientClicked", () => {
-      console.log('Client clicked')
+     // console.log('Client clicked')
       setState(state => ({ ...state, onHome: false, onClient:true }))
     })
     return () => {

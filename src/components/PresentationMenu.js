@@ -39,6 +39,7 @@ const PresentationMenu = () => {
     }
 
     const NextSlide = () => {
+        emitSumerianMessage('slide:next');
     }
 
     const HomeButton= ({clickAction})=>{
