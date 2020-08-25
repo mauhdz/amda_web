@@ -30,9 +30,11 @@ const PresentationMenu = () => {
     }
 
     const PreviousClient = () => {
+        emitSumerianMessage("previousClient");
     }
 
     const NextClient = () => {
+        emitSumerianMessage("nextClient");
     }
 
     const PreviousSlide = () => {
