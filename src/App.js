@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import GlobalState from './contexts/GlobalState';
 
@@ -10,6 +10,7 @@ import SumerianScene from './components/SumerianScene'
 
 function App() {
   const [state, setState] = useState({
+    progress:0,
     onLoading: true,
     onHome: true,
     onClient: false,
@@ -23,11 +24,9 @@ function App() {
     //console.log("We are finally home: ", window.state);
   }, [state.onHome]);
 
-  //Listen to events on sumerian scene and changes state
+  //Listens to events on sumerian scene and changes state
   useEffect(() => {
-    //console.log("should be called only once when sumerian starts");
     addSumerianListener("clientClicked", () => {
-     // console.log('Client clicked')
       setState(state => ({ ...state, onHome: false, onClient:true }))
     })
     return () => {
@@ -42,10 +41,9 @@ function App() {
     <GlobalState.Provider value={[state, setState]}>
       <div className="App">
         <NavBar />
-        {state.onLoading && <LoadingProgress />}
+        {state.onLoading && <LoadingProgress progress={state.progress} />}
         <div style={{ visibility: state.onLoading && 'hidden' }}>
-          <SumerianScene scene='amda'
-            onLoaded={() => setState(state => ({ ...state, onLoading: false }))} />
+          <SumerianScene scene={'amda'}/>
         </div>
       </div>
       <PresentationMenu />

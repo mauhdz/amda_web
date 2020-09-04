@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import GlobalState from '../contexts/GlobalState';
 
-import { emitSummerianMessage, emitSumerianMessage } from "../utils/SumerianInterface"
+import { emitSumerianMessage } from "../utils/SumerianInterface"
 import '../App.css';
 
 const PresentationMenu = () => {
@@ -38,10 +38,11 @@ const PresentationMenu = () => {
     }
 
     const PreviousSlide = () => {
+        emitSumerianMessage('previousSlide');
     }
 
     const NextSlide = () => {
-        emitSumerianMessage('slide:next');
+        emitSumerianMessage('nextSlide');
     }
 
     const HomeButton= ({clickAction})=>{
