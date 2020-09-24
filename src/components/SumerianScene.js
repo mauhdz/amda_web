@@ -1,16 +1,16 @@
 
-import React, { Component, useEffect, useContext,useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { XR as AwsXR } from 'aws-amplify';
 import Amplify from 'aws-amplify';
 import Aws_exports from '../aws-exports';
 import GlobalState from '../contexts/GlobalState';
 
-function SumerianScene({ scene}) {
+function SumerianScene({scene}) {
     Amplify.configure(Aws_exports);
 
     const [state, setState] = useContext(GlobalState);
 
-    async function loadAndStartScene() {
+    async function load_and_start_scene() {
         const progressCallback = (data) => {
             setState(state => ({ ...state, progress: Math.round(data*100)}))
         }
@@ -22,16 +22,28 @@ function SumerianScene({ scene}) {
         await AwsXR.loadScene(scene, "sumerian-scene-dom-id", sceneOptions);
         window.controller = AwsXR.getSceneController(scene);
         setState(state => ({ ...state, onLoading: false }))
-        AwsXR.start("amda");
-        AwsXR.enableAudio('amda');
+        AwsXR.start(scene);
     };
 
+    function enableScene(){
+        //This function should change the style for the scn to be shown
+        AwsXR.enableAudio(scene);
+    }
+
+    //OnMount
     useEffect(() => {
         async function performFunction() {
-            await loadAndStartScene();
+            await load_and_start_scene();
         }
         performFunction();
     }, []);
+
+    useEffect(()=>{
+        if(!state.onLoading){
+            enableScene()
+        }
+    }
+    ,[state.onStart]);
 
     return (
         <div>
@@ -44,5 +56,4 @@ function SumerianScene({ scene}) {
         </div>
     );
 }
-
 export default SumerianScene;
